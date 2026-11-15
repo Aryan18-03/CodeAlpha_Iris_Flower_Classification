@@ -105,7 +105,7 @@ jupyter notebook
 **Important:** Keep `Iris.csv` in the same folder as the notebook.
 
 ## Project Files
-- `CodeAlpha_Iris_Flower_Classification.ipynb` – Complete project notebook.
+- `Iris_flower_classification.ipynb` – Complete project notebook.
 - `Iris.csv` – Dataset used for classification.
 - `README.md` – Project documentation.
 
