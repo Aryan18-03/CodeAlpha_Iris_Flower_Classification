@@ -99,7 +99,7 @@ pip install pandas numpy matplotlib seaborn scikit-learn jupyter
 jupyter notebook
 ```
 
-5. Open `CodeAlpha_Iris_Flower_Classification.ipynb`.
+5. Open `iris_flower_classification.ipynb`.
 6. Run all notebook cells.
 
 **Important:** Keep `Iris.csv` in the same folder as the notebook.
