@@ -1,5 +1,13 @@
 # Iris Flower Classification using Machine Learning
 
+## 🚀 Live Demo
+
+Try the deployed Iris Flower Classification app here:
+
+**[🌸 Open Live Iris Flower Classifier](https://ihtscqiic43spl7nebcatj.streamlit.app/)**
+
+Explore the interactive dashboard by changing the flower measurements and viewing the predicted species in real time.
+
 ## Project Overview
 This project focuses on classifying Iris flowers into three different species using machine learning. The classification is performed using the **K-Nearest Neighbors (KNN)** algorithm with the Scikit-learn library.
 
