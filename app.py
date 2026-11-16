@@ -440,22 +440,6 @@ except Exception as error:
     st.stop()
 
 
-# --------------------------------------------------
-# 6. MODEL OVERVIEW
-# --------------------------------------------------
-
-metric1, metric2, metric3 = st.columns(3)
-
-metric1.metric("Test accuracy", f"{accuracy * 100:.2f}%")
-metric2.metric("Flowers in dataset", f"{len(df):,}")
-metric3.metric("Species", f"{df['Species'].nunique()}")
-
-
-st.divider()
-
-
-# --------------------------------------------------
-# --------------------------------------------------
 # 7. INTERACTIVE CLASSIFIER WORKSPACE
 # --------------------------------------------------
 
@@ -668,6 +652,19 @@ with result_panel:
             "The percentage is the share of the 5 nearest training neighbours "
             "voting for this class. It is not a calibrated probability."
         )
+
+
+# --------------------------------------------------
+# MODEL OVERVIEW
+# --------------------------------------------------
+
+metric1, metric2, metric3 = st.columns(3)
+
+metric1.metric("Test accuracy", f"{accuracy * 100:.2f}%")
+metric2.metric("Flowers in dataset", f"{len(df):,}")
+metric3.metric("Species", f"{df['Species'].nunique()}")
+
+st.divider()
 
 
 st.markdown("""
