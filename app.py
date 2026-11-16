@@ -444,6 +444,20 @@ st.markdown("""
         background: rgba(9, 9, 15, 0.94) !important;
     }
 
+    /* Hide Streamlit's top toolbar actions (Share, Star and Edit). */
+    [data-testid="stToolbar"],
+    [data-testid="stHeaderActionElements"],
+    #MainMenu {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+    }
+
+    [data-testid="stHeader"] {
+        height: 0 !important;
+        min-height: 0 !important;
+    }
+
     [data-testid="stMarkdownContainer"],
     [data-testid="stMarkdownContainer"] p,
     [data-testid="stMarkdownContainer"] li,
