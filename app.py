@@ -117,6 +117,113 @@ st.markdown("""
         font-weight: 600;
     }
 
+    .section-heading {
+        margin: 0.8rem 0 1.1rem 0;
+    }
+
+    .section-heading h2 {
+        color: #30205f !important;
+        font-size: 1.75rem;
+        letter-spacing: -0.035em;
+        margin: 0.15rem 0 0.2rem 0;
+    }
+
+    .section-heading p {
+        color: #756b8d !important;
+        margin: 0;
+    }
+
+    .eyebrow {
+        color: #875ac4;
+        font-size: 0.7rem;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+    }
+
+    .lower-heading {
+        margin-top: 2rem;
+    }
+
+    [data-testid="stVerticalBlockBorderWrapper"] {
+        border: 1px solid #e9e1f5 !important;
+        border-radius: 20px !important;
+        background: linear-gradient(180deg, #ffffff 0%, #fdfbff 100%) !important;
+        box-shadow: 0 8px 28px rgba(65, 39, 110, 0.055);
+        padding: 0.4rem;
+    }
+
+    .prediction-card {
+        text-align: center;
+        padding: 1.45rem 1rem 1.35rem 1rem;
+        border-radius: 17px;
+        margin: 0.6rem 0 1.1rem 0;
+        border: 1px solid #e9defa;
+        background: linear-gradient(145deg, #f7f2ff, #ffffff);
+    }
+
+    .prediction-card.setosa {
+        background: linear-gradient(145deg, #effcf5, #ffffff);
+        border-color: #d5f2e1;
+    }
+
+    .prediction-card.versicolor {
+        background: linear-gradient(145deg, #fff8e9, #ffffff);
+        border-color: #f6e7c5;
+    }
+
+    .prediction-card.virginica {
+        background: linear-gradient(145deg, #fff0f6, #ffffff);
+        border-color: #f4d8e6;
+    }
+
+    .prediction-kicker {
+        color: #8065a8;
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+    }
+
+    .prediction-flower {
+        font-size: 3.2rem;
+        line-height: 1.35;
+        margin-top: 0.45rem;
+    }
+
+    .prediction-name {
+        color: #38216f;
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+    }
+
+    .prediction-description {
+        color: #756b8d;
+        font-size: 0.9rem;
+        margin-top: 0.3rem;
+    }
+
+    [data-testid="stVerticalBlockBorderWrapper"] h3 {
+        color: #38216f !important;
+    }
+
+    [data-testid="stSlider"] {
+        padding: 0.55rem 0.75rem 0.2rem 0.75rem;
+    }
+
+    @media (max-width: 700px) {
+        .hero {
+            padding: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 1.8rem;
+        }
+
+        .prediction-name {
+            font-size: 1.7rem;
+        }
+    }
+
     .section-note {
         color: #756b8d !important;
         margin-top: -0.45rem;
@@ -348,98 +455,103 @@ st.divider()
 
 
 # --------------------------------------------------
-# 7. SAMPLE FLOWER BUTTONS
+# --------------------------------------------------
+# 7. INTERACTIVE CLASSIFIER WORKSPACE
 # --------------------------------------------------
 
-st.subheader("1. Choose a sample flower")
-st.markdown(
-    '<p class="section-note">Select an example to fill the measurement sliders automatically.</p>',
-    unsafe_allow_html=True
-)
+st.markdown("""
+<div class="section-heading">
+    <span class="eyebrow">FLOWER IDENTIFICATION</span>
+    <h2>Explore your flower</h2>
+    <p>Choose a preset or fine-tune the measurements. Your result updates live.</p>
+</div>
+""", unsafe_allow_html=True)
 
-sample1, sample2, sample3 = st.columns(3)
+input_panel, result_panel = st.columns([1.05, 0.95], gap="large")
 
-with sample1:
-    st.button(
-        "🌱 Setosa example",
-        use_container_width=True,
-        on_click=load_sample,
-        args=(5.1, 3.5, 1.4, 0.2)
-    )
+with input_panel:
+    with st.container(border=True):
+        st.markdown("### 🎛️ Flower measurements")
+        st.caption("All measurements are in centimetres.")
 
-with sample2:
-    st.button(
-        "🌼 Versicolor example",
-        use_container_width=True,
-        on_click=load_sample,
-        args=(6.0, 2.9, 4.5, 1.5)
-    )
+        st.markdown("**Quick examples**")
+        sample1, sample2, sample3 = st.columns(3)
 
-with sample3:
-    st.button(
-        "🌺 Virginica example",
-        use_container_width=True,
-        on_click=load_sample,
-        args=(6.5, 3.0, 5.5, 2.0)
-    )
+        with sample1:
+            st.button(
+                "🌱 Setosa",
+                use_container_width=True,
+                on_click=load_sample,
+                args=(5.1, 3.5, 1.4, 0.2)
+            )
+
+        with sample2:
+            st.button(
+                "🌼 Versicolor",
+                use_container_width=True,
+                on_click=load_sample,
+                args=(6.0, 2.9, 4.5, 1.5)
+            )
+
+        with sample3:
+            st.button(
+                "🌺 Virginica",
+                use_container_width=True,
+                on_click=load_sample,
+                args=(6.5, 3.0, 5.5, 2.0)
+            )
+
+        st.markdown("---")
+        st.markdown("**Sepal dimensions**")
+
+        sepal_col1, sepal_col2 = st.columns(2)
+
+        with sepal_col1:
+            st.slider(
+                "Sepal length",
+                min_value=0.0,
+                max_value=8.0,
+                step=0.1,
+                key="sepal_length"
+            )
+
+        with sepal_col2:
+            st.slider(
+                "Sepal width",
+                min_value=0.0,
+                max_value=5.0,
+                step=0.1,
+                key="sepal_width"
+            )
+
+        st.markdown("**Petal dimensions**")
+
+        petal_col1, petal_col2 = st.columns(2)
+
+        with petal_col1:
+            st.slider(
+                "Petal length",
+                min_value=0.0,
+                max_value=7.0,
+                step=0.1,
+                key="petal_length"
+            )
+
+        with petal_col2:
+            st.slider(
+                "Petal width",
+                min_value=0.0,
+                max_value=3.0,
+                step=0.1,
+                key="petal_width"
+            )
+
+        st.caption("Tip: Try the sample buttons first, then move a slider to see how the prediction changes.")
 
 
 # --------------------------------------------------
-# 8. INTERACTIVE MEASUREMENTS
+# 8. LIVE MODEL PREDICTION
 # --------------------------------------------------
-
-st.subheader("2. Adjust flower measurements")
-st.markdown(
-    '<p class="section-note">Move the sliders to enter the flower dimensions in centimetres.</p>',
-    unsafe_allow_html=True
-)
-
-left, right = st.columns(2)
-
-with left:
-    st.slider(
-        "Sepal length (cm)",
-        min_value=0.0,
-        max_value=8.0,
-        step=0.1,
-        key="sepal_length"
-    )
-
-    st.slider(
-        "Sepal width (cm)",
-        min_value=0.0,
-        max_value=5.0,
-        step=0.1,
-        key="sepal_width"
-    )
-
-with right:
-    st.slider(
-        "Petal length (cm)",
-        min_value=0.0,
-        max_value=7.0,
-        step=0.1,
-        key="petal_length"
-    )
-
-    st.slider(
-        "Petal width (cm)",
-        min_value=0.0,
-        max_value=3.0,
-        step=0.1,
-        key="petal_width"
-    )
-
-
-# --------------------------------------------------
-# 9. LIVE PREDICTION
-# --------------------------------------------------
-
-st.subheader("3. Live prediction")
-st.markdown(
-    '<p class="section-note">Your prediction updates automatically whenever you adjust a measurement.</p>',
-    unsafe_allow_html=True
-)
 
 input_data = pd.DataFrame(
     [[
@@ -460,8 +572,6 @@ probability_by_species = {
     for species, probability in zip(model.classes_, class_probabilities)
 }
 
-# For KNN, this percentage is the share of the five nearest
-# neighbours voting for the predicted class.
 vote_share = max(probability_by_species.values())
 
 current_measurements = {
@@ -473,8 +583,6 @@ current_measurements = {
 
 previous_prediction = st.session_state.latest_prediction
 
-# Recalculate on every app rerun, but add a history entry only
-# when the measurements have actually changed.
 if (
     previous_prediction is None
     or previous_prediction["measurements"] != current_measurements
@@ -495,45 +603,82 @@ if (
     })
 
 
-# 10. DISPLAY PREDICTION RESULT
+# --------------------------------------------------
+# 9. LIVE RESULT PANEL
 # --------------------------------------------------
 
-if st.session_state.latest_prediction is not None:
+with result_panel:
     result = st.session_state.latest_prediction
     display_species = result["species"].replace("Iris-", "").title()
 
-    st.markdown("### Prediction result")
+    with st.container(border=True):
+        st.markdown("### ✨ Your prediction")
+        st.caption("Live result · Updates with every measurement change")
 
-    result_col1, result_col2 = st.columns(2)
+        species_details = {
+            "Setosa": {
+                "emoji": "🌱",
+                "description": "Recognized by its notably short petals.",
+                "class_name": "setosa"
+            },
+            "Versicolor": {
+                "emoji": "🌼",
+                "description": "A middle-sized flower with balanced petal dimensions.",
+                "class_name": "versicolor"
+            },
+            "Virginica": {
+                "emoji": "🌺",
+                "description": "Typically has the largest petal dimensions.",
+                "class_name": "virginica"
+            }
+        }
 
-    with result_col1:
-        st.success(f"Predicted species: **{display_species}**")
+        details = species_details.get(display_species, {
+            "emoji": "🌸",
+            "description": "The model has identified this Iris species.",
+            "class_name": "other"
+        })
 
-    with result_col2:
-        st.metric("Top neighbour vote", f"{result['vote_share']:.0f}%")
+        st.markdown(
+            f"""
+            <div class="prediction-card {details['class_name']}">
+                <div class="prediction-kicker">PREDICTED SPECIES</div>
+                <div class="prediction-flower">{details['emoji']}</div>
+                <div class="prediction-name">{display_species}</div>
+                <div class="prediction-description">{details['description']}</div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
-    st.caption(
-        "For this KNN model, the percentage is the share of the 5 nearest "
-        "training neighbours voting for the predicted species. It is not a "
-        "calibrated probability or a guarantee of correctness."
-    )
+        st.markdown("**Nearest-neighbour voting**")
+        st.metric("Top species vote", f"{result['vote_share']:.0f}%")
 
-    probability_df = pd.DataFrame({
-        "Species": [
-            name.replace("Iris-", "").title()
-            for name in result["probabilities"].keys()
-        ],
-        "Neighbour vote (%)": list(result["probabilities"].values())
-    }).set_index("Species")
+        probability_df = pd.DataFrame({
+            "Species": [
+                name.replace("Iris-", "").title()
+                for name in result["probabilities"].keys()
+            ],
+            "Neighbour vote (%)": list(result["probabilities"].values())
+        }).set_index("Species")
 
-    st.markdown("#### Votes across the three species")
-    st.bar_chart(probability_df, y="Neighbour vote (%)")
+        st.bar_chart(probability_df, y="Neighbour vote (%)", height=190)
 
-
-st.divider()
+        st.caption(
+            "The percentage is the share of the 5 nearest training neighbours "
+            "voting for this class. It is not a calibrated probability."
+        )
 
 
-# --------------------------------------------------
+st.markdown("""
+<div class="section-heading lower-heading">
+    <span class="eyebrow">MODEL INSIGHTS</span>
+    <h2>Understand the dataset</h2>
+    <p>Compare the three species and review your recent predictions.</p>
+</div>
+""", unsafe_allow_html=True)
+
+
 # 11. SPECIES COMPARISON
 # --------------------------------------------------
 
