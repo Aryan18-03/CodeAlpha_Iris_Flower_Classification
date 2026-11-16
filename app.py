@@ -80,9 +80,85 @@ st.markdown("""
         margin: 0;
     }
 
+    .hero {
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 12px 32px rgba(92, 58, 145, 0.08);
+    }
+
+    .hero::after {
+        content: "✿";
+        position: absolute;
+        right: 3.2rem;
+        top: 0.35rem;
+        font-size: 8rem;
+        line-height: 1;
+        color: rgba(112, 65, 184, 0.09);
+        pointer-events: none;
+    }
+
+    .hero-tag {
+        display: inline-block;
+        padding: 0.35rem 0.75rem;
+        margin-bottom: 0.85rem;
+        border-radius: 999px;
+        background: #ffffff;
+        border: 1px solid #e4d8fb;
+        color: #7041b8;
+        font-size: 0.72rem;
+        font-weight: 750;
+        letter-spacing: 0.09em;
+    }
+
+    .hero-foot {
+        margin-top: 1.05rem;
+        color: #786a96;
+        font-size: 0.83rem;
+        font-weight: 600;
+    }
+
     .section-note {
         color: #756b8d !important;
         margin-top: -0.45rem;
+    }
+
+    [data-testid="stSubheader"] {
+        padding-top: 0.35rem;
+        padding-bottom: 0.15rem;
+    }
+
+    [data-testid="stSlider"] {
+        background: #fbf9ff;
+        border: 1px solid #eee7fa;
+        border-radius: 13px;
+        padding: 0.8rem 1rem 0.35rem 1rem;
+        margin-bottom: 0.55rem;
+    }
+
+    [data-testid="stSlider"] p {
+        color: #49336f !important;
+        font-weight: 600;
+    }
+
+    div[data-testid="stMetric"] {
+        transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    div[data-testid="stMetric"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 22px rgba(75, 45, 130, 0.10);
+    }
+
+    [data-testid="stAlert"] {
+        border-radius: 13px;
+    }
+
+    [data-testid="stDataFrame"] {
+        box-shadow: 0 3px 12px rgba(75, 45, 130, 0.04);
+    }
+
+    hr {
+        border-color: #eee7f7 !important;
     }
 
     div[data-testid="stMetric"] {
@@ -202,8 +278,10 @@ def load_sample(sepal_length, sepal_width, petal_length, petal_width):
 
 st.markdown("""
 <div class="hero">
+    <div class="hero-tag">MACHINE LEARNING · INTERACTIVE DEMO</div>
     <h1>🌸 Iris Flower Classifier</h1>
-    <p>Explore flower measurements and predict an Iris species with Machine Learning.</p>
+    <p>Discover the species behind each flower through four simple measurements.</p>
+    <div class="hero-foot">Powered by Python · Scikit-learn · K-Nearest Neighbors</div>
 </div>
 """, unsafe_allow_html=True)
 
