@@ -25,78 +25,140 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    .stApp {
-        background-color: #f6f8fc;
+    :root {
+        color-scheme: light;
+    }
+
+    .stApp,
+    [data-testid="stAppViewContainer"],
+    [data-testid="stMain"] {
+        background: #ffffff !important;
+        color: #24213a !important;
     }
 
     [data-testid="stHeader"] {
-        background: rgba(246, 248, 252, 0.9);
+        background: rgba(255, 255, 255, 0.96) !important;
+    }
+
+    [data-testid="stMarkdownContainer"],
+    [data-testid="stMarkdownContainer"] p,
+    [data-testid="stMarkdownContainer"] li,
+    [data-testid="stCaptionContainer"],
+    [data-testid="stWidgetLabel"] p,
+    label {
+        color: #49445f !important;
+    }
+
+    h1, h2, h3, h4,
+    [data-testid="stHeading"] h1,
+    [data-testid="stHeading"] h2,
+    [data-testid="stHeading"] h3,
+    [data-testid="stMarkdownContainer"] h1,
+    [data-testid="stMarkdownContainer"] h2,
+    [data-testid="stMarkdownContainer"] h3 {
+        color: #30205f !important;
     }
 
     .hero {
-        padding: 2rem 2.2rem;
+        padding: 2.1rem 2.3rem;
         border-radius: 22px;
-        background: linear-gradient(115deg, #e0f2fe 0%, #ede9fe 55%, #fce7f3 100%);
-        border: 1px solid #e2e8f0;
+        background: linear-gradient(120deg, #f5f0ff 0%, #eee7ff 55%, #faf5ff 100%);
+        border: 1px solid #e6dcff;
         margin-bottom: 1.3rem;
     }
 
     .hero h1 {
-        color: #172554;
+        color: #38216f !important;
         font-size: 2.35rem;
-        margin: 0 0 0.4rem 0;
+        margin: 0 0 0.45rem 0;
         letter-spacing: -0.04em;
     }
 
     .hero p {
-        color: #475569;
+        color: #62557d !important;
         font-size: 1.05rem;
         margin: 0;
     }
 
     .section-note {
-        color: #64748b;
+        color: #756b8d !important;
         margin-top: -0.45rem;
     }
 
     div[data-testid="stMetric"] {
-        background: #ffffff;
-        border: 1px solid #e5eaf2;
+        background: #ffffff !important;
+        border: 1px solid #e8e1f5 !important;
         border-radius: 16px;
         padding: 1rem 1.1rem;
-        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.035);
+        box-shadow: 0 4px 16px rgba(75, 45, 130, 0.06);
     }
 
-    div[data-testid="stMetricLabel"] p {
-        color: #64748b;
-    }
-
+    div[data-testid="stMetricLabel"] p,
     div[data-testid="stMetricValue"] {
-        color: #172554;
+        color: #38216f !important;
     }
 
-    div.stButton > button {
-        border-radius: 11px;
-        min-height: 2.7rem;
-        font-weight: 600;
-        border: 1px solid #dbe3ef;
+    div.stButton > button,
+    div.stButton > button[kind="secondary"] {
+        background: #ffffff !important;
+        color: #6336a5 !important;
+        border: 1px solid #d9c9f5 !important;
+        border-radius: 12px !important;
+        min-height: 2.8rem;
+        font-weight: 650;
+        box-shadow: 0 2px 8px rgba(75, 45, 130, 0.05);
+    }
+
+    div.stButton > button:hover {
+        background: #f5efff !important;
+        color: #4b2488 !important;
+        border-color: #a98add !important;
     }
 
     div.stButton > button[kind="primary"] {
-        background: #2563eb;
-        border: 1px solid #2563eb;
-        color: white;
+        background: #7041b8 !important;
+        color: #ffffff !important;
+        border: 1px solid #7041b8 !important;
     }
 
-    div[data-testid="stVerticalBlockBorderWrapper"] {
-        background: #ffffff;
-        border-radius: 16px;
-        border-color: #e5eaf2;
+    div.stButton > button[kind="primary"]:hover {
+        background: #5c329e !important;
+        color: #ffffff !important;
+    }
+
+    [data-testid="stSlider"] [role="slider"] {
+        background: #7041b8 !important;
+        border-color: #7041b8 !important;
+    }
+
+    [data-testid="stSlider"] [data-baseweb="slider"] > div > div {
+        background: #7041b8 !important;
+    }
+
+    [data-testid="stTabs"] button[role="tab"] {
+        color: #62557d !important;
+    }
+
+    [data-testid="stTabs"] button[role="tab"][aria-selected="true"] {
+        color: #6336a5 !important;
+        border-bottom-color: #7041b8 !important;
+    }
+
+    [data-testid="stDataFrame"],
+    [data-testid="stTable"] {
+        border: 1px solid #e8e1f5;
+        border-radius: 12px;
+    }
+
+    [data-testid="stExpander"] {
+        background: #ffffff !important;
+        border: 1px solid #e8e1f5 !important;
+        border-radius: 14px !important;
     }
 
     .footer {
         text-align: center;
-        color: #94a3b8;
+        color: #9388aa !important;
         padding: 1.5rem 0 0.5rem 0;
         font-size: 0.85rem;
     }
