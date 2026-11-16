@@ -83,7 +83,88 @@ st.markdown("""
     .hero {
         position: relative;
         overflow: hidden;
-        box-shadow: 0 12px 32px rgba(92, 58, 145, 0.08);
+        box-shadow: 0 16px 42px rgba(92, 58, 145, 0.13);
+        background:
+            radial-gradient(circle at 92% 18%, rgba(255,255,255,0.9) 0 3%, transparent 3.2%),
+            radial-gradient(circle at 84% 80%, rgba(203,180,245,0.28), transparent 25%),
+            linear-gradient(118deg, #f3edff 0%, #eee5ff 48%, #fff8fd 100%);
+    }
+
+    .hero h1 {
+        font-size: clamp(2.15rem, 4vw, 3rem);
+        line-height: 1.12;
+        max-width: 760px;
+    }
+
+    .hero p {
+        max-width: 680px;
+        line-height: 1.65;
+    }
+
+    .hero-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+        margin-top: 1.15rem;
+    }
+
+    .hero-pills span {
+        display: inline-block;
+        padding: 0.42rem 0.75rem;
+        border: 1px solid rgba(126, 88, 185, 0.18);
+        border-radius: 999px;
+        background: rgba(255,255,255,0.72);
+        color: #634493;
+        font-size: 0.78rem;
+        font-weight: 650;
+    }
+
+    .hero-foot {
+        margin-top: 1.15rem;
+        letter-spacing: 0.08em;
+        font-size: 0.7rem;
+    }
+
+    [data-testid="stMainBlockContainer"] {
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+        max-width: 1450px;
+    }
+
+    [data-testid="stVerticalBlockBorderWrapper"] {
+        transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    [data-testid="stVerticalBlockBorderWrapper"]:hover {
+        box-shadow: 0 12px 34px rgba(65, 39, 110, 0.09);
+    }
+
+    [data-testid="stSlider"] [role="slider"]:focus {
+        box-shadow: 0 0 0 0.22rem rgba(112, 65, 184, 0.18);
+    }
+
+    .prediction-card {
+        box-shadow: 0 10px 26px rgba(75, 45, 130, 0.07);
+    }
+
+    .section-heading {
+        padding-bottom: 0.2rem;
+    }
+
+    .eyebrow {
+        display: inline-block;
+        padding: 0.28rem 0.58rem;
+        border-radius: 6px;
+        background: #f3edff;
+    }
+
+    @media (max-width: 700px) {
+        .hero-pills {
+            gap: 0.4rem;
+        }
+        .hero-pills span {
+            font-size: 0.7rem;
+        }
     }
 
     .hero::after {
@@ -385,10 +466,15 @@ def load_sample(sepal_length, sepal_width, petal_length, petal_width):
 
 st.markdown("""
 <div class="hero">
-    <div class="hero-tag">MACHINE LEARNING · INTERACTIVE DEMO</div>
+    <div class="hero-tag">✦ MACHINE LEARNING · INTERACTIVE DEMO</div>
     <h1>🌸 Iris Flower Classifier</h1>
-    <p>Discover the species behind each flower through four simple measurements.</p>
-    <div class="hero-foot">Powered by Python · Scikit-learn · K-Nearest Neighbors</div>
+    <p>Every flower has a story. Explore its measurements and let machine learning reveal its species.</p>
+    <div class="hero-pills">
+        <span>✿ 150 flower samples</span>
+        <span>✿ 3 Iris species</span>
+        <span>✿ 4 measurements</span>
+    </div>
+    <div class="hero-foot">BUILT WITH PYTHON &nbsp;·&nbsp; SCIKIT-LEARN &nbsp;·&nbsp; STREAMLIT</div>
 </div>
 """, unsafe_allow_html=True)
 
