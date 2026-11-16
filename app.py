@@ -432,46 +432,59 @@ with right:
 
 
 # --------------------------------------------------
-# 9. PREDICTION
+# 9. LIVE PREDICTION
 # --------------------------------------------------
 
-st.subheader("3. Predict the species")
+st.subheader("3. Live prediction")
+st.markdown(
+    '<p class="section-note">Your prediction updates automatically whenever you adjust a measurement.</p>',
+    unsafe_allow_html=True
+)
 
-if st.button("🔍 Predict flower species", type="primary", use_container_width=True):
-    input_data = pd.DataFrame(
-        [[
-            st.session_state.sepal_length,
-            st.session_state.sepal_width,
-            st.session_state.petal_length,
-            st.session_state.petal_width
-        ]],
-        columns=feature_columns
-    )
+input_data = pd.DataFrame(
+    [[
+        st.session_state.sepal_length,
+        st.session_state.sepal_width,
+        st.session_state.petal_length,
+        st.session_state.petal_width
+    ]],
+    columns=feature_columns
+)
 
-    input_scaled = scaler.transform(input_data)
-    predicted_species = model.predict(input_scaled)[0]
-    class_probabilities = model.predict_proba(input_scaled)[0]
+input_scaled = scaler.transform(input_data)
+predicted_species = model.predict(input_scaled)[0]
+class_probabilities = model.predict_proba(input_scaled)[0]
 
-    probability_by_species = {
-        str(species): float(probability * 100)
-        for species, probability in zip(model.classes_, class_probabilities)
-    }
+probability_by_species = {
+    str(species): float(probability * 100)
+    for species, probability in zip(model.classes_, class_probabilities)
+}
 
-    # For KNN, this percentage represents the share of the five
-    # nearest neighbours voting for the predicted class.
-    vote_share = max(probability_by_species.values())
+# For KNN, this percentage is the share of the five nearest
+# neighbours voting for the predicted class.
+vote_share = max(probability_by_species.values())
 
+current_measurements = {
+    "Sepal length": st.session_state.sepal_length,
+    "Sepal width": st.session_state.sepal_width,
+    "Petal length": st.session_state.petal_length,
+    "Petal width": st.session_state.petal_width
+}
+
+previous_prediction = st.session_state.latest_prediction
+
+# Recalculate on every app rerun, but add a history entry only
+# when the measurements have actually changed.
+if (
+    previous_prediction is None
+    or previous_prediction["measurements"] != current_measurements
+):
     prediction_record = {
         "time": datetime.now().strftime("%d %b %Y, %I:%M:%S %p"),
         "species": str(predicted_species),
         "vote_share": vote_share,
         "probabilities": probability_by_species,
-        "measurements": {
-            "Sepal length": st.session_state.sepal_length,
-            "Sepal width": st.session_state.sepal_width,
-            "Petal length": st.session_state.petal_length,
-            "Petal width": st.session_state.petal_width
-        }
+        "measurements": current_measurements
     }
 
     st.session_state.latest_prediction = prediction_record
@@ -482,7 +495,6 @@ if st.button("🔍 Predict flower species", type="primary", use_container_width=
     })
 
 
-# --------------------------------------------------
 # 10. DISPLAY PREDICTION RESULT
 # --------------------------------------------------
 
