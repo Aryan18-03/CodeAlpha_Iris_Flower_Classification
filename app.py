@@ -827,7 +827,7 @@ with input_panel:
         st.caption("All measurements are in centimetres.")
 
         st.markdown("**Quick examples**")
-        sample1, sample2, sample3 = st.columns(3)
+        sample1, sample2, sample3, reset_col = st.columns(4)
 
         with sample1:
             st.button(
@@ -851,6 +851,15 @@ with input_panel:
                 use_container_width=True,
                 on_click=load_sample,
                 args=(6.5, 3.0, 5.5, 2.0)
+            )
+
+        with reset_col:
+            st.button(
+                "↺ Reset",
+                use_container_width=True,
+                help="Restore all four sliders to their default measurements.",
+                on_click=load_sample,
+                args=(5.1, 3.5, 1.4, 0.2)
             )
 
         st.markdown("---")
