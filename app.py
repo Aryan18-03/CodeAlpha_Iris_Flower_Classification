@@ -582,6 +582,34 @@ st.markdown("""
         box-shadow:0 0 0 .22rem rgba(167,139,250,.25) !important;
     }
 
+    /* Keep every Streamlit button, including Clear history, on-theme. */
+    [data-testid="stButton"] > button,
+    [data-testid="stButton"] button,
+    div.stButton > button,
+    div.stButton > button[kind="secondary"],
+    div.stButton > button[kind="tertiary"] {
+        background:#211a2e !important;
+        background-color:#211a2e !important;
+        color:#e5dcff !important;
+        border:1px solid #51406b !important;
+        border-radius:12px !important;
+        min-height:2.8rem;
+        font-weight:700;
+        box-shadow:none !important;
+    }
+    [data-testid="stButton"] > button:hover,
+    [data-testid="stButton"] button:hover,
+    div.stButton > button:hover {
+        background:#302343 !important;
+        background-color:#302343 !important;
+        color:#ffffff !important;
+        border-color:#a78bfa !important;
+    }
+    [data-testid="stButton"] > button:focus,
+    [data-testid="stButton"] button:focus {
+        box-shadow:0 0 0 .18rem rgba(167,139,250,.25) !important;
+    }
+
     div.stButton > button {
         background:#211a2e !important;
         color:#e5dcff !important;
